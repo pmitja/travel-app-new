@@ -56,8 +56,21 @@ const config = {
           DEFAULT: "#F7F7F7",
           'active': "#EAECED"
         },
+        buttonBorder: {
+          DEFAULT: "#E4E4E4"
+        },
+        boxShadow: {
+          DEFAULT: "#d7dadd",
+        },
         textColor: {
           DEFAULT: "#313030"
+        },
+        pillColor: {
+          DEFAULT: "#F0EFD6"
+        },
+        buttonColor: {
+          DEFAULT: "#F7F7F7",
+          orange: "#FFB380"
         }
       },
       borderRadius: {
@@ -79,6 +92,9 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backgroundImage: {
+        'meshBanner': "url('/banner.webp')",
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

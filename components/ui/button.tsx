@@ -20,6 +20,10 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         orange:
           "text-secondary-foreground bg-buttonColor-orange hover:bg-buttonColor-orange/80 shadow-lg shadow-boxShadow/90",
+        lightBlue:
+          "text-secondary-foreground bg-buttonColor-lightblue hover:bg-buttonColor-lightblue/80 shadow-lg shadow-boxShadow/90",
+        customGhost:
+          "text-accent-foreground bg-white hover:bg-gray-100 shadow-lg shadow-boxShadow/90 border-2 border-[#313030]",
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -63,14 +63,16 @@ const config = {
           DEFAULT: "#d7dadd",
         },
         textColor: {
-          DEFAULT: "#313030"
+          DEFAULT: "#313030",
+          card: "#EDE3DD"
         },
         pillColor: {
           DEFAULT: "#F0EFD6"
         },
         buttonColor: {
           DEFAULT: "#F7F7F7",
-          orange: "#FFB380"
+          orange: "#FFB380",
+          lightblue: "#CBDFE2"
         }
       },
       borderRadius: {
@@ -94,7 +96,7 @@ const config = {
       },
       backgroundImage: {
         'meshBanner': "url('/banner.webp')",
-      }
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

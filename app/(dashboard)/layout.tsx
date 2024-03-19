@@ -1,5 +1,5 @@
-import DashboardNavbar from "@/components/DashboardNavbar";
-import SideBar from "@/components/Sidebar";
+import DashboardNavbar from "@/components/dashboard-navbar";
+import SideBar from "@/components/sidebar";
 
 type LayoutParams = {
   children: React.ReactNode;

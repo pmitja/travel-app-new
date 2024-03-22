@@ -76,7 +76,8 @@ const config = {
         },
         activeColor: {
           DEFAULT: "#EAECED",
-          background: "#EEF3ED"
+          background: "#EEF3ED",
+          border: "#1A9F00"
         }
       },
       borderRadius: {

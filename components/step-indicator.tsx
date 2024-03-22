@@ -16,8 +16,8 @@ const StepIndicator = ({ number, text, isPassed }: StepIndicatorProps) => {
       )}>
       <span
         className={cn(
-          'rounded-full border-2 border-textColor text-md text-textColor font-semibold w-10 h-10 flex items-center justify-center',
-          isPassed && 'text-textColor/20 border-textColor/20'
+          'rounded-full border-2 text-md text-textColor font-semibold w-10 h-10 flex items-center justify-center border-activeColor-border',
+          isPassed && 'text-textColor/20 border-textColor/20 border-textColor/20'
         )}>
         {number}
       </span>

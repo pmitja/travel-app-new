@@ -6,7 +6,7 @@ import { Plus } from 'lucide-react';
 
 export default function Discover() {
   return (
-    <main className="flex min-h-full flex-col items-center justify-between">
+    <main className="flex min-h-full flex-col items-center justify-between pt-20">
       <div className="bg-meshBanner bg-cover w-full min-h-1/3">
         <div className="container my-12 mx-auto flex flex-col gap-3 min-w-[85%] flex-wrap">
           <h2 className="text-3xl font-bold text-textColor">

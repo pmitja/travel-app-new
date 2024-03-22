@@ -73,6 +73,10 @@ const config = {
           DEFAULT: "#F7F7F7",
           orange: "#FFB380",
           lightblue: "#CBDFE2"
+        },
+        activeColor: {
+          DEFAULT: "#EAECED",
+          background: "#EEF3ED"
         }
       },
       borderRadius: {

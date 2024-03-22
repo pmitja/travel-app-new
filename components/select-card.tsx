@@ -1,16 +1,10 @@
-import { ImageData } from '@/types/types';
+import { ImageData, SelectCardProps } from '@/types/types';
 import Image from 'next/image';
 import { Badge } from './ui/badge';
 
-type SelectCardProps = {
-  title: string;
-  text: string;
-  imageData: ImageData;
-};
-
 const SelectCard = ({ title, text, imageData }: SelectCardProps) => {
   return (
-    <div className="card relative w-64 h-40 bg-cover bg-center rounded-lg overflow-hidden min-h-[300px] bg-gradient-to-t from-black via-black to-black/20 shadow-boxShadow shadow-lg">
+    <div className="card relative max-w-[250px] w-full bg-cover bg-center overflow-hidden min-h-[300px] bg-gradient-to-t from-black via-black to-black/20 shadow-boxShadow shadow-lg rounded-2xl">
       <Image
         src={imageData.src}
         alt={imageData.alt}

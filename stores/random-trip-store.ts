@@ -8,6 +8,7 @@ interface RandomTripState {
   preferences: string,
   budget: number,
   continents: string[],
+  styles: string[],
   setStartingPoint: (startingPoint: string) => void,
   setHowManyDays: (howManyDays: number) => void,
   setTravelGroup: (travelGroup: string) => void,
@@ -15,6 +16,7 @@ interface RandomTripState {
   setPreferences: (preferences: string) => void,
   setBudget: (budget: number) => void,
   setContinents: (continents: string[]) => void,
+  setStyles: (styles: string[]) => void,
 }
 
 export const useRandomTripStore = create<RandomTripState>()((set) => ({
@@ -25,6 +27,7 @@ export const useRandomTripStore = create<RandomTripState>()((set) => ({
   preferences: "",
   budget: 0,
   continents: [],
+  styles: [],
   setStartingPoint: (startingPoint) => set({ startingPoint }),
   setHowManyDays: (howManyDays) => set({ howManyDays }),
   setTravelGroup: (travelGroup) => set({ travelGroup }),
@@ -32,4 +35,5 @@ export const useRandomTripStore = create<RandomTripState>()((set) => ({
   setPreferences: (preferences) => set({ preferences }),
   setBudget: (budget) => set({ budget }),
   setContinents: (continents) => set({ continents }),
+  setStyles: (styles) => set({ styles }),
 }))

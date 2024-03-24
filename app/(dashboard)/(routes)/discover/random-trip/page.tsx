@@ -6,6 +6,7 @@ import FormTravelStyles from '@/components/form-travel-styles';
 import SectionContent from '@/components/section-content';
 import SectionSidebar from '@/components/section-sidebar';
 import StepIndicator from '@/components/step-indicator';
+import SummaryStep from '@/components/summary-step';
 import { useGeneralStore } from '@/stores/general-store';
 
 const STEP_TITLES = [
@@ -26,10 +27,11 @@ const RandomTrip = () => {
         <StepIndicator number={4} text="Step 4" />
       </SectionSidebar>
       <SectionContent>
-        <h1 className="text-3xl text-textColor">Step {generalStore.randomTripStep}: <span className='font-semibold'>{STEP_TITLES[generalStore.randomTripStep - 1]}</span></h1>
+        <h3 className="text-3xl text-textColor">Step {generalStore.randomTripStep}: <span className='font-semibold'>{STEP_TITLES[generalStore.randomTripStep - 1]}</span></h3>
         {generalStore.randomTripStep === 1 && <FormRandomTrip />}
         {generalStore.randomTripStep === 2 && <FormContinents />}
         {generalStore.randomTripStep === 3 && <FormTravelStyles />}
+        {generalStore.randomTripStep === 4 && <SummaryStep />}
       </SectionContent>
     </main>
   );

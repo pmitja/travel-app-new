@@ -36,7 +36,7 @@ const FormTravelStyles = () => {
       styles: [],
     },
   });
-
+  
   function handleCheckboxChange(style: string) {
     setSelectedStyles((prevSelectedStyles) => {
       if (prevSelectedStyles.includes(style)) {
@@ -48,7 +48,7 @@ const FormTravelStyles = () => {
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    randomTripStore.setContinents(values.styles);
+    randomTripStore.setStyles(values.styles);
     generalStore.setRandomTripStep(4);
   }
   return (

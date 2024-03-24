@@ -17,7 +17,7 @@ import { useRandomTripStore } from '@/stores/random-trip-store';
 import { useGeneralStore } from '@/stores/general-store';
 import SelectCard from './select-card';
 import { Checkbox } from './ui/checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Continent, ContinentDetails } from '@/types/enums';
 import { Label } from './ui/label';
 
@@ -37,13 +37,22 @@ const FormContinents = () => {
     },
   });
 
+  useEffect(() => {
+    const storedContinents = randomTripStore.continents;
+    
+    setSelectedContinents(storedContinents);
+
+    form.setValue('continents', storedContinents as [string, ...string[]]);
+  }, []);
+
   function handleCheckboxChange(continent: string) {
-    setSelectedContinents((prevSelectedContinents) => {
-      if (prevSelectedContinents.includes(continent)) {
-        return prevSelectedContinents.filter((item) => item !== continent);
-      } else {
-        return [...prevSelectedContinents, continent];
-      }
+    setSelectedContinents(prevSelectedContinents => {
+      const updatedContients = prevSelectedContinents.includes(continent)
+        ? prevSelectedContinents.filter(item => item !== continent)
+        : [...prevSelectedContinents, continent];
+      
+      form.setValue('continents', updatedContients as [string, ...string[]]); // Update form values
+      return updatedContients;
     });
   }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { string, z } from 'zod';
 import {
   Form,
   FormControl,
@@ -17,7 +17,7 @@ import { useRandomTripStore } from '@/stores/random-trip-store';
 import { useGeneralStore } from '@/stores/general-store';
 import SelectCard from './select-card';
 import { Checkbox } from './ui/checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Styles, StylesDetails } from '@/types/enums';
 import { Label } from './ui/label';
 
@@ -36,14 +36,23 @@ const FormTravelStyles = () => {
       styles: [],
     },
   });
-  
+
+  useEffect(() => {
+    const storedStyles = randomTripStore.styles;
+    
+    setSelectedStyles(storedStyles);
+
+    form.setValue('styles', storedStyles as [string, ...string[]]);
+  }, []);
+
   function handleCheckboxChange(style: string) {
-    setSelectedStyles((prevSelectedStyles) => {
-      if (prevSelectedStyles.includes(style)) {
-        return prevSelectedStyles.filter((item) => item !== style);
-      } else {
-        return [...prevSelectedStyles, style];
-      }
+    setSelectedStyles(prevSelectedStyles => {
+      const updatedStyles = prevSelectedStyles.includes(style)
+        ? prevSelectedStyles.filter(item => item !== style)
+        : [...prevSelectedStyles, style];
+      
+      form.setValue('styles', updatedStyles as [string, ...string[]]); // Update form values
+      return updatedStyles;
     });
   }
 
@@ -51,6 +60,7 @@ const FormTravelStyles = () => {
     randomTripStore.setStyles(values.styles);
     generalStore.setRandomTripStep(4);
   }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -62,46 +72,46 @@ const FormTravelStyles = () => {
               <FormLabel>Styles</FormLabel>
               <FormControl>
                 <div className="flex gap-4 flex-wrap">
-                  {Object.entries(Styles).map(
-                    ([_, style]) => {
-                      return (
-                        <Label
-                          key={style}
-                          className="max-w-[200px] max-h-[200px] w-full md:min-h-[300px] md:max-w-[250px]"
-                          htmlFor={style}>
-                          <SelectCard
-                            title={style}
-                            imageData={{
-                              src: StylesDetails[style].src,
-                              alt: StylesDetails[style].alt,
-                            }}
-                            text={StylesDetails[style].description}
-                            classNames={
-                              selectedStyles.includes(style)
-                                ? 'outline outline-4 outline-offset-2 outline-green-500'
-                                : ''
-                            }
-                          />
-                          <Checkbox
-                            id={style}
-                            name={style}
-                            value={style}
-                            onCheckedChange={(event) => {
-                              handleCheckboxChange(style);
-                              field.onChange(
-                                event
-                                  ? [...selectedStyles, style]
-                                  : selectedStyles.filter(
-                                      (item) => item !== style
-                                    )
-                              );
-                            }}
-                            className="hidden"
-                          />
-                        </Label>
-                      );
-                    }
-                  )}
+                  {Object.entries(Styles).map(([_, style]) => {
+                    return (
+                      <Label
+                        key={style}
+                        className="max-w-[200px] max-h-[200px] w-full md:min-h-[300px] md:max-w-[250px]"
+                        htmlFor={style}>
+                        <SelectCard
+                          title={style}
+                          imageData={{
+                            src: StylesDetails[style].src,
+                            alt: StylesDetails[style].alt,
+                          }}
+                          text={StylesDetails[style].description}
+                          classNames={
+                            selectedStyles.includes(style)
+                              ? 'outline outline-4 outline-offset-2 outline-green-500'
+                              : ''
+                          }
+                        />
+                        <Checkbox
+                          id={style}
+                          name={style}
+                          value={style}
+                          onCheckedChange={(event) => {
+                            handleCheckboxChange(style);
+                            field.onChange(
+                              event
+                                ? selectedStyles.includes(style)
+                                  ? selectedStyles
+                                  : [...selectedStyles, style]
+                                : selectedStyles.filter(
+                                    (item) => item !== style
+                                  )
+                            );
+                          }}
+                          className="hidden"
+                        />
+                      </Label>
+                    );
+                  })}
                 </div>
               </FormControl>
               <FormDescription>

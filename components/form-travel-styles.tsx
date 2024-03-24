@@ -18,81 +18,81 @@ import { useGeneralStore } from '@/stores/general-store';
 import SelectCard from './select-card';
 import { Checkbox } from './ui/checkbox';
 import { useState } from 'react';
-import { Continent, ContinentDetails } from '@/types/enums';
+import { Styles, StylesDetails } from '@/types/enums';
 import { Label } from './ui/label';
 
 const formSchema = z.object({
-  continents: z.array(z.string()).nonempty(),
+  styles: z.array(z.string()).nonempty(),
 });
 
-const FormContinents = () => {
-  const [selectedContinents, setSelectedContinents] = useState<string[]>([]);
+const FormTravelStyles = () => {
+  const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
   const randomTripStore = useRandomTripStore();
   const generalStore = useGeneralStore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      continents: [],
+      styles: [],
     },
   });
 
-  function handleCheckboxChange(continent: string) {
-    setSelectedContinents((prevSelectedContinents) => {
-      if (prevSelectedContinents.includes(continent)) {
-        return prevSelectedContinents.filter((item) => item !== continent);
+  function handleCheckboxChange(style: string) {
+    setSelectedStyles((prevSelectedStyles) => {
+      if (prevSelectedStyles.includes(style)) {
+        return prevSelectedStyles.filter((item) => item !== style);
       } else {
-        return [...prevSelectedContinents, continent];
+        return [...prevSelectedStyles, style];
       }
     });
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    randomTripStore.setContinents(values.continents);
-    generalStore.setRandomTripStep(3);
+    randomTripStore.setContinents(values.styles);
+    generalStore.setRandomTripStep(4);
   }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="continents"
+          name="styles"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Continents</FormLabel>
+              <FormLabel>Styles</FormLabel>
               <FormControl>
                 <div className="flex gap-4 flex-wrap">
-                  {Object.entries(Continent).map(
-                    ([_, continent]) => {
+                  {Object.entries(Styles).map(
+                    ([_, style]) => {
                       return (
                         <Label
-                          key={continent}
+                          key={style}
                           className="max-w-[200px] max-h-[200px] w-full md:min-h-[300px] md:max-w-[250px]"
-                          htmlFor={continent}>
+                          htmlFor={style}>
                           <SelectCard
-                            title={continent}
+                            title={style}
                             imageData={{
-                              src: ContinentDetails[continent].src,
-                              alt: ContinentDetails[continent].alt,
+                              src: StylesDetails[style].src,
+                              alt: StylesDetails[style].alt,
                             }}
-                            text={ContinentDetails[continent].description}
+                            text={StylesDetails[style].description}
                             classNames={
-                              selectedContinents.includes(continent)
+                              selectedStyles.includes(style)
                                 ? 'outline outline-4 outline-offset-2 outline-green-500'
                                 : ''
                             }
                           />
                           <Checkbox
-                            id={continent}
-                            name={continent}
-                            value={continent}
+                            id={style}
+                            name={style}
+                            value={style}
                             onCheckedChange={(event) => {
-                              handleCheckboxChange(continent);
+                              handleCheckboxChange(style);
                               field.onChange(
                                 event
-                                  ? [...selectedContinents, continent]
-                                  : selectedContinents.filter(
-                                      (item) => item !== continent
+                                  ? [...selectedStyles, style]
+                                  : selectedStyles.filter(
+                                      (item) => item !== style
                                     )
                               );
                             }}
@@ -129,4 +129,4 @@ const FormContinents = () => {
   );
 };
 
-export default FormContinents;
+export default FormTravelStyles;

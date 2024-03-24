@@ -1,8 +1,5 @@
 import DashboardHeaderCard from '@/components/dashboard-header-card';
-import SelectCard from '@/components/select-card';
 import TripTeaser from '@/components/trip-teaser';
-import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
 
 export default function Discover() {
   return (

@@ -2,6 +2,7 @@
 
 import FormContinents from '@/components/form-continets';
 import FormRandomTrip from '@/components/form-random-trip';
+import FormTravelStyles from '@/components/form-travel-styles';
 import SectionContent from '@/components/section-content';
 import SectionSidebar from '@/components/section-sidebar';
 import StepIndicator from '@/components/step-indicator';
@@ -17,15 +18,18 @@ const STEP_TITLES = [
 const RandomTrip = () => {
   const generalStore = useGeneralStore();
   return (
-    <main className="pt-20">
+    <main className="md:pt-20">
       <SectionSidebar>
         <StepIndicator number={1} text="Step 1" />
         <StepIndicator number={2} text="Step 2" />
+        <StepIndicator number={3} text="Step 3" />
+        <StepIndicator number={4} text="Step 4" />
       </SectionSidebar>
       <SectionContent>
         <h1 className="text-3xl text-textColor">Step {generalStore.randomTripStep}: <span className='font-semibold'>{STEP_TITLES[generalStore.randomTripStep - 1]}</span></h1>
         {generalStore.randomTripStep === 1 && <FormRandomTrip />}
         {generalStore.randomTripStep === 2 && <FormContinents />}
+        {generalStore.randomTripStep === 3 && <FormTravelStyles />}
       </SectionContent>
     </main>
   );

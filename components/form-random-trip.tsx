@@ -164,7 +164,7 @@ const FormRandomTrip = () => {
           control={form.control}
           name="budget"
           render={({ field: { value, onChange } }) => (
-            <FormItem className="flex flex-col">
+            <FormItem className="flex flex-col gap-2">
               <FormLabel>Budget - $ {value.toLocaleString('en-US')}</FormLabel>
               <FormControl>
                 <Slider

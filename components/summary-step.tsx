@@ -9,6 +9,11 @@ const SummaryStep = () => {
   const randomTripStore = useRandomTripStore();
   const generalStore = useGeneralStore();
 
+  const handleSumbit = () => {
+    console.log(randomTripStore);
+    randomTripStore.resetStore();
+  }
+
   useEffect(() => {
     const container = document.getElementById('random-trip');
     container?.scrollIntoView({ behavior: 'smooth' });
@@ -78,7 +83,7 @@ const SummaryStep = () => {
         </span>
       </div>
       <div className="flex flex-col place-items-center sm:items-center  md:flex-row gap-5 mt-10 md:mt-20">
-        <Button type="submit" variant={'lightBlue'} size={'2xl'} className='max-w-fit'>
+        <Button type="submit" variant={'lightBlue'} size={'2xl'} className='max-w-fit' onClick={handleSumbit}>
           Generate
         </Button>
         <Button

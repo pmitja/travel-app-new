@@ -1,33 +1,42 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
-interface RandomTripState {
-  startingPoint: string,
-  howManyDays: number,
-  travelGroup: string,
-  travelPeriod: string,
-  preferences: string,
-  budget: number,
-  continents: string[],
-  styles: string[],
-  setStartingPoint: (startingPoint: string) => void,
-  setHowManyDays: (howManyDays: number) => void,
-  setTravelGroup: (travelGroup: string) => void,
-  setTravelPeriod: (travelPeriod: string) => void,
-  setPreferences: (preferences: string) => void,
-  setBudget: (budget: number) => void,
-  setContinents: (continents: string[]) => void,
-  setStyles: (styles: string[]) => void,
+type State = {
+  startingPoint: string;
+  howManyDays: number;
+  travelGroup: string;
+  travelPeriod: string;
+  preferences: string;
+  budget: number;
+  continents: string[];
+  styles: string[];
 }
 
-export const useRandomTripStore = create<RandomTripState>()((set) => ({
-  startingPoint: "",
+type Actions = {
+  setStartingPoint: (startingPoint: string) => void;
+  setHowManyDays: (howManyDays: number) => void;
+  setTravelGroup: (travelGroup: string) => void;
+  setTravelPeriod: (travelPeriod: string) => void;
+  setPreferences: (preferences: string) => void;
+  setBudget: (budget: number) => void;
+  setContinents: (continents: string[]) => void;
+  setStyles: (styles: string[]) => void;
+  resetStore: () => void;
+}
+
+// Define the initial state
+const initialState: State = {
+  startingPoint: '',
   howManyDays: 0,
-  travelGroup: "",
-  travelPeriod: "",
-  preferences: "",
+  travelGroup: '',
+  travelPeriod: '',
+  preferences: '',
   budget: 0,
   continents: [],
   styles: [],
+}
+
+export const useRandomTripStore = create<State & Actions>((set) => ({
+  ...initialState,
   setStartingPoint: (startingPoint) => set({ startingPoint }),
   setHowManyDays: (howManyDays) => set({ howManyDays }),
   setTravelGroup: (travelGroup) => set({ travelGroup }),
@@ -36,4 +45,7 @@ export const useRandomTripStore = create<RandomTripState>()((set) => ({
   setBudget: (budget) => set({ budget }),
   setContinents: (continents) => set({ continents }),
   setStyles: (styles) => set({ styles }),
-}))
+  resetStore: () => {
+    set(initialState);
+  },
+}));

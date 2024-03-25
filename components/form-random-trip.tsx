@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from './ui/select';
 import { Slider } from './ui/slider';
+import { useEffect } from 'react';
 
 const formSchema = z.object({
   startingPoint: z.string().min(2).max(50).refine(value => value !== '', {
@@ -70,6 +71,16 @@ const FormRandomTrip = () => {
     randomTripStore.setBudget(values.budget);
     generalStore.setRandomTripStep(2);
   }
+
+  useEffect(() => {
+    // Set initial values from randomTripStore
+    form.setValue('startingPoint', randomTripStore.startingPoint);
+    form.setValue('howManyDays', randomTripStore.howManyDays);
+    form.setValue('travelGroup', randomTripStore.travelGroup as "" | "Solo" | "Couple" | "Family" | "Business");
+    form.setValue('travelPeriod', randomTripStore.travelPeriod as "" | "Winter" | "Summer" | "Autumn" | "Spring");
+    form.setValue('budget', randomTripStore.budget);
+    // Set other initial values similarly
+  }, [randomTripStore]);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -112,7 +123,7 @@ const FormRandomTrip = () => {
             <FormItem>
               <FormLabel>Travel period</FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange}>
+                <Select onValueChange={field.onChange} value={randomTripStore.travelPeriod}>
                   <SelectTrigger>
                     <SelectValue
                       placeholder="Select travel period"
@@ -141,7 +152,7 @@ const FormRandomTrip = () => {
             <FormItem>
               <FormLabel>Travel group</FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange}>
+                <Select onValueChange={field.onChange} value={randomTripStore.travelGroup}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select travel group" />
                   </SelectTrigger>

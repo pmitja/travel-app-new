@@ -21,12 +21,12 @@ const RandomTrip = () => {
   return (
     <main className="md:pt-20">
       <SectionSidebar>
-        <StepIndicator number={1} text="Step 1" />
-        <StepIndicator number={2} text="Step 2" />
-        <StepIndicator number={3} text="Step 3" />
-        <StepIndicator number={4} text="Step 4" />
+        <StepIndicator number={1} text="Step 1" isActive={generalStore.randomTripStep === 1}/>
+        <StepIndicator number={2} text="Step 2" isActive={generalStore.randomTripStep === 2}/>
+        <StepIndicator number={3} text="Step 3" isActive={generalStore.randomTripStep === 3}/>
+        <StepIndicator number={4} text="Step 4" isActive={generalStore.randomTripStep === 4}/>
       </SectionSidebar>
-      <SectionContent>
+      <SectionContent id={'random-trip'}>
         <h3 className="text-3xl text-textColor">Step {generalStore.randomTripStep}: <span className='font-semibold'>{STEP_TITLES[generalStore.randomTripStep - 1]}</span></h3>
         {generalStore.randomTripStep === 1 && <FormRandomTrip />}
         {generalStore.randomTripStep === 2 && <FormContinents />}

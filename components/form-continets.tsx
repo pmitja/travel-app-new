@@ -22,7 +22,7 @@ import { Continent, ContinentDetails } from '@/types/enums';
 import { Label } from './ui/label';
 
 const formSchema = z.object({
-  continents: z.array(z.string()).nonempty(),
+  continents: z.array(z.string()).nonempty({ message: 'Please select at least one continent.' }),
 });
 
 const FormContinents = () => {
@@ -38,6 +38,8 @@ const FormContinents = () => {
   });
 
   useEffect(() => {
+    const container = document.getElementById('random-trip');
+    container?.scrollIntoView({ behavior: 'smooth' });
     const storedContinents = randomTripStore.continents;
     
     setSelectedContinents(storedContinents);
@@ -51,7 +53,6 @@ const FormContinents = () => {
         ? prevSelectedContinents.filter(item => item !== continent)
         : [...prevSelectedContinents, continent];
       
-        form.setValue('continents', updatedContients as [string, ...string[]]);
       return updatedContients;
     });
   }
@@ -69,6 +70,10 @@ const FormContinents = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Continents</FormLabel>
+              <FormDescription>
+                Which continents would you like to visit (select multiple)?
+              </FormDescription>
+              <FormMessage />
               <FormControl>
                 <div className="flex gap-4 flex-wrap">
                   {Object.entries(Continent).map(
@@ -76,7 +81,7 @@ const FormContinents = () => {
                       return (
                         <Label
                           key={continent}
-                          className="max-w-[200px] max-h-[200px] w-full md:min-h-[300px] md:max-w-[250px]"
+                          className="max-w-[150px] max-h-[150px] sm:max-w-[200px] sm:max-h-[200px] w-full md:min-h-[300px] md:max-w-[250px]"
                           htmlFor={continent}>
                           <SelectCard
                             title={continent}
@@ -113,10 +118,6 @@ const FormContinents = () => {
                   )}
                 </div>
               </FormControl>
-              <FormDescription>
-                How do you want to travel? Alone, with friends, family, etc.
-              </FormDescription>
-              <FormMessage />
             </FormItem>
           )}
         />

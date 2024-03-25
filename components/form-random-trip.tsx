@@ -81,6 +81,11 @@ const FormRandomTrip = () => {
     form.setValue('budget', randomTripStore.budget);
     // Set other initial values similarly
   }, [randomTripStore]);
+
+  useEffect(() => {
+    const container = document.getElementById('random-trip');
+    container?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -123,7 +128,7 @@ const FormRandomTrip = () => {
             <FormItem>
               <FormLabel>Travel period</FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange} value={randomTripStore.travelPeriod}>
+                <Select onValueChange={field.onChange} defaultValue={randomTripStore.travelPeriod}>
                   <SelectTrigger>
                     <SelectValue
                       placeholder="Select travel period"
@@ -152,7 +157,7 @@ const FormRandomTrip = () => {
             <FormItem>
               <FormLabel>Travel group</FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange} value={randomTripStore.travelGroup}>
+                <Select onValueChange={field.onChange} defaultValue={randomTripStore.travelGroup}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select travel group" />
                   </SelectTrigger>
@@ -181,7 +186,7 @@ const FormRandomTrip = () => {
                 <Slider
                   max={100000}
                   step={50}
-                  defaultValue={[value]}
+                  defaultValue={[randomTripStore.budget]}
                   onValueChange={onChange}
                 />
               </FormControl>

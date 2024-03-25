@@ -22,7 +22,7 @@ import { Styles, StylesDetails } from '@/types/enums';
 import { Label } from './ui/label';
 
 const formSchema = z.object({
-  styles: z.array(z.string()).nonempty(),
+  styles: z.array(z.string()).nonempty({ message: 'Please select at least one style.'}),
 });
 
 const FormTravelStyles = () => {
@@ -38,6 +38,8 @@ const FormTravelStyles = () => {
   });
 
   useEffect(() => {
+    const container = document.getElementById('random-trip');
+    requestAnimationFrame(() => container?.scrollIntoView({ behavior: 'smooth' }));
     const storedStyles = randomTripStore.styles;
     
     setSelectedStyles(storedStyles);
@@ -51,7 +53,6 @@ const FormTravelStyles = () => {
         ? prevSelectedStyles.filter(item => item !== style)
         : [...prevSelectedStyles, style];
       
-      form.setValue('styles', updatedStyles as [string, ...string[]]);
       return updatedStyles;
     });
   }
@@ -69,14 +70,18 @@ const FormTravelStyles = () => {
           name="styles"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Styles</FormLabel>
+              <FormLabel>Travel styles</FormLabel>
+              <FormDescription>
+                What do you want to do on your trip (select multiple)?
+              </FormDescription>
+              <FormMessage />
               <FormControl>
                 <div className="flex gap-4 flex-wrap">
                   {Object.entries(Styles).map(([_, style]) => {
                     return (
                       <Label
                         key={style}
-                        className="max-w-[200px] max-h-[200px] w-full md:min-h-[300px] md:max-w-[250px]"
+                        className="max-w-[150px] max-h-[150px] sm:max-w-[200px] sm:max-h-[200px] w-full md:min-h-[300px] md:max-w-[250px]"
                         htmlFor={style}>
                         <SelectCard
                           title={style}
@@ -114,10 +119,6 @@ const FormTravelStyles = () => {
                   })}
                 </div>
               </FormControl>
-              <FormDescription>
-                How do you want to travel? Alone, with friends, family, etc.
-              </FormDescription>
-              <FormMessage />
             </FormItem>
           )}
         />

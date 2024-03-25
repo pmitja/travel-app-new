@@ -1,7 +1,10 @@
 import DashboardHeaderCard from '@/components/dashboard-header-card';
 import TripTeaser from '@/components/trip-teaser';
+import { currentUser } from '@/lib/utils';
 
-export default function Discover() {
+export default async function Discover() {
+  const user = await currentUser();
+  console.log(user)
   return (
     <main className="flex min-h-full flex-col items-center justify-between pt-20">
       <div className="bg-meshBanner bg-cover w-full min-h-1/3">

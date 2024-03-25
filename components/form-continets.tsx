@@ -51,7 +51,7 @@ const FormContinents = () => {
         ? prevSelectedContinents.filter(item => item !== continent)
         : [...prevSelectedContinents, continent];
       
-      form.setValue('continents', updatedContients as [string, ...string[]]); // Update form values
+        form.setValue('continents', updatedContients as [string, ...string[]]);
       return updatedContients;
     });
   }

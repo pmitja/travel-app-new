@@ -51,7 +51,7 @@ const FormTravelStyles = () => {
         ? prevSelectedStyles.filter(item => item !== style)
         : [...prevSelectedStyles, style];
       
-      form.setValue('styles', updatedStyles as [string, ...string[]]); // Update form values
+      form.setValue('styles', updatedStyles as [string, ...string[]]);
       return updatedStyles;
     });
   }

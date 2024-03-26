@@ -1,6 +1,7 @@
 "use server";
 
 export const register = async (values: { email: string; password: string }): Promise<any | null> => {
+  const { email, password } = values;
   try {
     const res = await fetch(
       "https://travel-ai-api.onrender.com/api/auth/signup",
@@ -9,21 +10,26 @@ export const register = async (values: { email: string; password: string }): Pro
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          email,
+          password,
+          name: 'Mitja'
+        }),
       }
     );
     
     console.log(res.status, 'register');
     
-    if (res.status === 400) {
-      return null;
+    if (res && !res.ok) {
+      if (res.status === 409) {
+        return { error: "Email already in use!" };
+      } else {
+        console.log(res.status, 'register');
+      }
     }
-
-    const user = await res.json();
-    console.log(user);
-    
-    if (res.ok && user) {
-      return user;
+  
+    if (res && res.ok) {
+      return { success: "Account successfully created!" };
     }
     
     throw new Error("Registration failed");

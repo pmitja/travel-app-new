@@ -15,7 +15,6 @@ export const login = async (values: { email: string, password: string}) => {
     })
   } catch (error) {
     if (error instanceof AuthError) {
-      console.log(error)
       switch (error.type) {
         case 'CredentialsSignin':
           return {

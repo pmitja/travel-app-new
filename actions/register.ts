@@ -18,13 +18,9 @@ export const register = async (values: { email: string; password: string }): Pro
       }
     );
     
-    console.log(res.status, 'register');
-    
     if (res && !res.ok) {
       if (res.status === 409) {
         return { error: "Email already in use!" };
-      } else {
-        console.log(res.status, 'register');
       }
     }
   

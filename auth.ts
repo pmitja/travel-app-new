@@ -62,5 +62,5 @@ export const {
   session: {
     strategy: "jwt",
   },
-  secret: "seafasfafsaffasfsfafeteairiarjijwajrijaii",
+  secret: "d28acc22f2cf2e8bf79ec439b02955097bc52c350da16fa468f0ab6c243db691",
 });

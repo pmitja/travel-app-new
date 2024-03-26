@@ -1,6 +1,6 @@
 "use server";
 
-export const register = async (values: { email: string; password: string }): Promise<any | null> => {
+export const register = async (values: { email: string; password: string }): Promise<{ error?: string, success?: string } | null> => {
   const { email, password } = values;
   try {
     const res = await fetch(
